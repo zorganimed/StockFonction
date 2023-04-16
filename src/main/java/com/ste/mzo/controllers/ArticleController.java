@@ -142,5 +142,16 @@ public class ArticleController {
          System.out.println("show details method");
 		return "article/showArticle";
 	}
+	
+	@PostMapping("/searchLabel")
+	public String findArticlesByLabel(@RequestParam("label")String label, Model model) {
+
+		List<Article> ls = (List<Article>) articleRepository.findArticleByLabel("%"+label+"%");
+		if (ls.isEmpty())
+			ls = null;
+		model.addAttribute("label", label);
+		model.addAttribute("articles", ls);
+		return "article/listArticles";
+	}
 
 }
