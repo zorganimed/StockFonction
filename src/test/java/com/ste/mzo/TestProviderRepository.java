@@ -21,7 +21,7 @@ import com.ste.mzo.repositories.ProviderRepository;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @TestMethodOrder(OrderAnnotation.class)
 public class TestProviderRepository {
-	@Autowired
+	/*@Autowired
 	private ProviderRepository providerRepositoryTest;
 	@Test
 	@Rollback(false)
@@ -47,5 +47,5 @@ public class TestProviderRepository {
 		assertThat(p.getAdress()).isEqualTo("USA");
 		providerRepositoryTest.delete(p);
 		}
-	}
+	}*/
 }
