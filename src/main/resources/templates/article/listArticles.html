@@ -23,9 +23,21 @@
 </head>
 <body>
 	<h3 align="center">Tableau des articles</h3>
+
 	<div class="container my-2">
+
 		<div class="card">
 			<div class="card-body">
+				<form th:action="@{/article/searchLabel}" method="post">
+
+					<label class="col-form-label">Taper un label </label>
+					<!-- input type="text" name="padress" class="form-control" id="ProvideAdress"  placeholder="Adresse"-->
+					<input type="text" name="label" th:value="${label}" />
+					<button class="btn btn-primary" type="submit" value="search">
+						<i class="fa fa-search">Chercher Article</i>
+					</button>
+
+				</form>
 				<div th:switch="${articles}" class="container my-5">
 					<p class="my-5">
 						<a class="btn btn-primary" th:href="@{/article/add}"><i
