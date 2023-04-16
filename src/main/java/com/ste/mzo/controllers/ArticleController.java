@@ -147,7 +147,6 @@ public class ArticleController {
 	public String findArticlesByLabel(@RequestParam("label")String label, Model model) {
 
 		List<Article> ls = (List<Article>) articleRepository.findArticleByLabel("%"+label+"%");
-		System.out.println("message dans search");
 		if (ls.isEmpty())
 			ls = null;
 		model.addAttribute("label", label);
