@@ -139,7 +139,7 @@ public class ArticleController {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid provider Id:" + id));
 
 		model.addAttribute("article", article);
-
+         System.out.println("show details method");
 		return "article/showArticle";
 	}
 
