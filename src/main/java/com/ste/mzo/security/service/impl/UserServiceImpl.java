@@ -39,7 +39,13 @@ public class UserServiceImpl implements UserService {
         //encrypt the password once we integrate spring security
         //user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        Role role = roleRepository.findByName("ROLE_ADMIN");
+        Role role ;
+        long c = roleRepository.countRole();
+        System.out.println("count is role"+c);
+        if(c>0)
+        role = roleRepository.findByName("ROLE_USER");
+        else
+        role =	roleRepository.findByName("ROLE_ADMIN");
         if(role == null){
             role = checkRoleExist();
         }
@@ -70,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     private Role checkRoleExist() {
         Role role = new Role();
-        long c = roleRepository.count();
+        long c = roleRepository.countRole();
         System.out.println("count is "+c);
         if(c>0)
         	role.setName("ROLE_USER");

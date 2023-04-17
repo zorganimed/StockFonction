@@ -9,6 +9,6 @@ import com.ste.mzo.security.entity.Role;
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Role findByName(String name);
     
-    @Query("select count(r) from Role r ")
+    @Query("select count(*) from Role r ")
     int countRole();
 }
