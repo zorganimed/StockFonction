@@ -25,7 +25,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("index")
+    @GetMapping(value = {"/","/index"})
     public String home(){
         return "index";
     }

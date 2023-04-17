@@ -70,7 +70,12 @@ public class UserServiceImpl implements UserService {
 
     private Role checkRoleExist() {
         Role role = new Role();
-        role.setName("ROLE_ADMIN");
+        long c = roleRepository.count();
+        System.out.println("count is "+c);
+        if(c>0)
+        	role.setName("ROLE_USER");
+        else
+        	role.setName("ROLE_ADMIN");
         return roleRepository.save(role);
     }
 }
