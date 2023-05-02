@@ -83,7 +83,7 @@ public class Provider {
 		this.email = email;
 	}
 
-	//@JsonManagedReference
+	@JsonManagedReference
 	public List<Article> getArticles() {
 		return articles;
 	}
