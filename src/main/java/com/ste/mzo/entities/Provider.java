@@ -1,7 +1,13 @@
 package com.ste.mzo.entities;
 
 
+import java.io.Serializable;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,9 +17,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import net.minidev.json.annotate.JsonIgnore;
 
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Provider {
 
 	@Id
@@ -28,6 +36,7 @@ public class Provider {
 	private String email;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "provider")
+	//@JsonIgnoreProperties("provider")
 	private List<Article> articles;
 
 	public Provider() {
@@ -74,18 +83,18 @@ public class Provider {
 		this.email = email;
 	}
 
-	/*public List<Article> getArticles() {
+	//@JsonManagedReference
+	public List<Article> getArticles() {
 		return articles;
 	}
 
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
-	}*/
+	}
 
 	@Override
 	public String toString() {
 		return "Provider [name=" + name + ", adress=" + adress + ", email=" + email + "]";
 	}
-
 }
 

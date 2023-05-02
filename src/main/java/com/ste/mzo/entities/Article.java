@@ -1,7 +1,15 @@
 package com.ste.mzo.entities;
 
+import java.io.Serializable;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,9 +20,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
-public class Article {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Article implements Serializable{
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,6 +46,7 @@ public class Article {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "provider_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnoreProperties("articles")
 	private Provider provider;
 
 	public Article() {
@@ -90,11 +103,12 @@ public class Article {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
+	//@JsonBackReference
 	public Provider getProvider() {
 		return provider;
 	}
 
+	//@JsonSetter
 	public void setProvider(Provider provider) {
 		this.provider = provider;
 	}
