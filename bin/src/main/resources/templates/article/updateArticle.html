@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+	crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<meta charset="utf-8" />
+<title></title>
+</head>
+<body>
+	<div class="container my-5">
+		<h1 align="center">Ajouter un article</h1>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-10">
+					<form method="post" th:action="@{/article/update}"
+						th:object="${article}" enctype="multipart/form-data">
+						<input type="hidden" th:field="*{id}"/>
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label for="ArticleLabel" class="col-form-label">Label</label>
+								<!-- input type="text" name="pname" class="form-control" id="ProviderName"  placeholder="Provider Name"-->
+								<input type="text" th:field="*{label}" class="form-control"
+									id="ArticleLabel" placeholder="Article Label" /> <span
+									th:if="${#fields.hasErrors('label')}" th:errors="*{label}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="ArticlePrice" class="col-form-label">Price</label>
+								<!-- input type="text" name="padress" class="form-control" id="ProvideAdress"  placeholder="Adresse"-->
+								<input type="text" th:field="*{price}" class="form-control"
+									id="ArticlePrice" placeholder="Article Price" /> <span
+									th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+									class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for ="price" class="col-form-label">Picture</label>
+								 <input class="form-control" type="file" name="files" multiple>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="ProviderName" class="col-form-label">Providers</label>
+								<!-- input type="email" name="pemail" class="form-control" id="ProviderEmail"   placeholder="Email"-->
+
+								<select class="form-control" name="providerId">
+
+									<option th:each="pr:${providers}" th:value="${pr.id}"
+										th:text="${pr.name}"
+										th:selected="${pr.id == idProvider}">
+
+								</select>
+							</div>
+							<div class="col-md-6">
+								<input type="submit" class="btn btn-primary"
+									value="Update Article" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

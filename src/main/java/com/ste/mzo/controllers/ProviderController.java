@@ -32,6 +32,7 @@ public class ProviderController {
 
 	@GetMapping("/list")
 	public String listProviders(Model model) {
+		System.out.println("le chemin "+System.getProperty("user.home"));
 		List<Provider> ls = (List<Provider>) providerRepository.findAll();
 		model.addAttribute("providers", ls);
 		if (ls.isEmpty())

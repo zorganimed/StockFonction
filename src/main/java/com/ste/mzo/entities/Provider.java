@@ -4,6 +4,7 @@ package com.ste.mzo.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -83,7 +84,7 @@ public class Provider {
 		this.email = email;
 	}
 
-	@JsonManagedReference
+	@JsonBackReference
 	public List<Article> getArticles() {
 		return articles;
 	}

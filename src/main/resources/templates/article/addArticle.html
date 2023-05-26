@@ -37,10 +37,10 @@
 									th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
 									class="text-danger"></span>
 							</div>
-							<div class="form-group col-md-8">
+							<!--div class="form-group col-md-8">
 								<label for ="price" class="col-form-label">Picture</label>
 								 <input class="form-control" type="file" name="files" multiple>
-							</div>
+							</div-->
 
 							<div class="form-group col-md-8">
 								<label for="ProviderName" class="col-form-label">Providers</label>
@@ -53,6 +53,11 @@
 
 								</select>
 							</div>
+							<div class="form-group">
+                               <label class="control-label">Photo:</label>
+                               <input type="file" name="photo" class="form-control"/>
+                               <span class="text-danger" th:errors="*{picture}" ></span>
+                            </div>
 							<div class="col-md-6">
 								<input type="submit" class="btn btn-primary"
 									value="Add Article" />

@@ -2,13 +2,17 @@ package com.ste.mzo.rest;
 
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 import jakarta.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ste.mzo.entities.Article;
@@ -33,6 +38,8 @@ import com.ste.mzo.repositories.ProviderRepository;
 public class ArticleRestController {
 	private final ProviderRepository providerRepository;
 	private final ArticleRepository articleRepository;
+	@Value("${dir.images}")
+	private String imageDir;
 
 	@Autowired
 	public ArticleRestController(ProviderRepository providerRepository, ArticleRepository articleRepository) {
@@ -95,4 +102,25 @@ public class ArticleRestController {
 		return articleRepository.findById(articleId);
 
 	}
+	
+	
+	@GetMapping(path="/photoProduct/{id}",produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getPhoto(@PathVariable("id") Long id) throws Exception{
+		Article p = articleRepository.findById(id).get();
+        //return Files.readAllBytes(Paths.get(System.getProperty("user.home")+"/ecom/products/"+p.getPicture()));
+		return Files.readAllBytes(Paths.get(imageDir+p.getPicture()));
+
+    }
+
+    @PostMapping(path = "/uploadPhoto/{id}")
+    public void uploadPhoto(MultipartFile file, @PathVariable Long id) throws Exception{
+    	 System.out.println("path is "+System.getProperty("user.home"));
+    	Article p = articleRepository.findById(id).get();
+    	System.out.println(file.getOriginalFilename());
+    p.setPicture(file.getOriginalFilename());
+   
+    //Files.write(Paths.get(System.getProperty("user.home")+"/ecom/products/"+p.getPicture()), file.getBytes());
+    Files.write(Paths.get(imageDir+p.getPicture()), file.getBytes());
+    articleRepository.save(p);
+    }
 }

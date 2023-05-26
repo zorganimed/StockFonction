@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- CSS only -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+<title>Gestion de stock</title>
+</head>
+<body>
+	<h3 align="center">Tableau des Providers</h3>
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+			<form th:action="@{/provider/searchAdress}" method="post">
+			
+								<label class="col-form-label">Taper une adresse </label>
+								<!-- input type="text" name="padress" class="form-control" id="ProvideAdress"  placeholder="Adresse"-->
+								<input type="text" name="adress" th:value="${adress}" />
+									<button class="btn btn-primary" type="submit"><i
+							class="fa fa-search">Chercher Povider</i></button> 
+							
+							</form>
+			
+				<div th:switch="${providers}" class="container my-5">
+					<p class="my-5">
+						<a class="btn btn-primary" th:href="@{/provider/add}"><i
+							class="fa fa-user-plus" aria-hidden="true">Ajouter Povider</i></a>
+					</p>
+					<div class="col-md-10">
+						<h2 th:case="null">No Providers yet</h2>
+						<!-- div th:if="${providers==null or providers.empty}"><h2 th:case="null">No Providers yet</h2></div-->
+						<div th:case="*">
+							<table class="table table-striped" align="center" border="1">
+								<tr>
+									<th>Nom</th>
+									<th>Adresse</th>
+									<th>Email</th>
+									<th>Détails</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>
+								<tr th:each="p:${providers}">
+									<td th:text="${p.name}"></td>
+									<td th:text="${p.adress}"></td>
+									<td th:text="${p.email}"></td>
+									<td><a th:href="@{/provider/show/{id}(id=${p.id})}"class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i>Details</a></td>
+									<td><a th:href="@{/provider/edit/{id}(id=${p.id})}"
+										class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+									<td><a th:href="@{/provider/delete/{id}(id=${p.id})}"
+										class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

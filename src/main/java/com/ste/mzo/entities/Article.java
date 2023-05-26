@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -46,7 +47,7 @@ public class Article implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "provider_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnoreProperties("articles")
+	//@JsonIgnoreProperties("articles")
 	private Provider provider;
 
 	public Article() {
@@ -103,7 +104,7 @@ public class Article implements Serializable{
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	//@JsonBackReference
+ 	//@JsonManagedReference
 	public Provider getProvider() {
 		return provider;
 	}

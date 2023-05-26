@@ -11,5 +11,7 @@ public class FonctionStockApplication extends SpringBootServletInitializer{
 	public static void main(String[] args) {
 		SpringApplication.run(FonctionStockApplication.class, args);
 	}
+	
+	
 
 }
