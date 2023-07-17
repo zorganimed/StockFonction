@@ -1,9 +1,9 @@
 FROM openjdk:17-jdk
 
-COPY ./target/stock-0.0.1-SNAPSHOT.jar usr/app/stock.jar
+COPY ./target/fonctionstk.jar usr/app/fonctionstk.jar
 
 WORKDIR usr/app
 
 EXPOSE 8086
 
-ENTRYPOINT ["java", "-jar" , "stock.jar"]
+ENTRYPOINT ["java", "-jar" , "fonctionstk.jar"]
