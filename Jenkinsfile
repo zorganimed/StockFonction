@@ -15,12 +15,20 @@ pipeline{
                 sh 'mvn package'
             }
         }
-        stage('Create Dockerimage'){
+        /*stage('Docker image'){
             steps{
-                sh 'docker build -t stock-jenkins-image .'
+                sh 'docker build -t zorgani/stock-jenkins-image .'
             }
+        }*/
+       stage('Push image to HUb'){
+            steps{ 
+               withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                 sh 'docker login -u zorgani -p ${dockerhubpwd}'
+                 
+                 sh 'docker push zorgani/stock-jenkins-image'
+             }
+          }
         }
-        
     }
     
 }
