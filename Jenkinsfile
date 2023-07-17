@@ -15,7 +15,7 @@ pipeline{
                 sh 'mvn package'
             }
         }
-        /*stage('Docker image'){
+        stage('Docker image'){
             steps{
                 sh 'docker build -t zorgani/stock-jenkins-image .'
             }
@@ -28,7 +28,7 @@ pipeline{
                  sh 'docker push zorgani/stock-jenkins-image'
              }
           }
-        }*/
+        }
     }
     
 }
