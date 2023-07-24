@@ -13,7 +13,7 @@ pipeline{
        
     stage('Build'){
             steps{
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/zorganimed/StockFonction']])
+               // checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/zorganimed/StockFonction']])
                 sh 'mvn clean install -DskipTests'
             }
         }
